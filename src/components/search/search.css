@@ -1,0 +1,21 @@
+.search {
+  padding: 20px;
+  width: 100%;
+}
+form {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+input {
+  height: 40px;
+  width: 50%;
+  border-radius: 5px;
+  outline: none;
+  padding-left: 15px;
+}
+h2 {
+  text-transform: uppercase;
+}

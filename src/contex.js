@@ -1,20 +1,34 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+const ContextApp = createContext();
 
-const AppProvider = () => {
+const AppProvider = ({ children }) => {
+  const [query, setQuery] = useState("Ironman");
   const fetchMovies = async () => {
-    fetch("https://imdb8.p.rapidapi.com/auto-complete?q=game%20of%20thr", {
+    fetch(`https://imdb8.p.rapidapi.com/auto-complete?q=${query}`, {
       method: "GET",
       headers: {
-        "x-rapidapi-key": "ac15c909abmshc1f9e05404f21bap1c4186jsnc8db3c9e6c8a",
+        "x-rapidapi-key": "fbbcbdfb33mshdb975f5e6272a03p1428ebjsn1627d5753bb6",
         "x-rapidapi-host": "imdb8.p.rapidapi.com",
       },
     })
-      .then((response) => {
-        console.log(response);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
       })
       .catch((err) => {
         console.error(err);
       });
   };
+  useEffect(() => {
+    fetchMovies();
+  }, []);
+  return (
+    <ContextApp.Provider value={{ query, setQuery }}>
+      {children}
+    </ContextApp.Provider>
+  );
+};
+export const useGlobalContext = () => {
+  return useContext(ContextApp);
 };
 export default AppProvider;
