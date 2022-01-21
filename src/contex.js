@@ -2,8 +2,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ContextApp = createContext();
 
 const AppProvider = ({ children }) => {
-  const [query, setQuery] = useState("Ironman");
+  const [query, setQuery] = useState("batman");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [movies, setMovies] = useState([]);
   const fetchMovies = async () => {
+    setIsLoading(true);
     fetch(`https://imdb8.p.rapidapi.com/auto-complete?q=${query}`, {
       method: "GET",
       headers: {
@@ -13,7 +17,9 @@ const AppProvider = ({ children }) => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        setMovies(data.d);
+        setIsLoading(false);
+        console.log(data.d);
       })
       .catch((err) => {
         console.error(err);
@@ -21,9 +27,9 @@ const AppProvider = ({ children }) => {
   };
   useEffect(() => {
     fetchMovies();
-  }, []);
+  }, [query]);
   return (
-    <ContextApp.Provider value={{ query, setQuery }}>
+    <ContextApp.Provider value={{ query, setQuery, movies,isLoading }}>
       {children}
     </ContextApp.Provider>
   );

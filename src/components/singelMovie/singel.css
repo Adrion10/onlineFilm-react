@@ -1,0 +1,11 @@
+.singelMovie {
+  width: 50%;
+  height: 100vh;
+  padding: 30px;
+  display: flex;
+}
+.singelMovie img {
+  width: 500px;
+  height: 500px;
+  margin-right: 20px;
+}
