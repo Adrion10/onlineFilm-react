@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ContextApp = createContext();
 
 const AppProvider = ({ children }) => {
-  const [query, setQuery] = useState("batman");
+  const [query, setQuery] = useState("avengers");
   const [isLoading, setIsLoading] = useState(false);
 
   const [movies, setMovies] = useState([]);
@@ -27,9 +27,10 @@ const AppProvider = ({ children }) => {
   };
   useEffect(() => {
     fetchMovies();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
   return (
-    <ContextApp.Provider value={{ query, setQuery, movies,isLoading }}>
+    <ContextApp.Provider value={{ query, setQuery, movies, isLoading }}>
       {children}
     </ContextApp.Provider>
   );

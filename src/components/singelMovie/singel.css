@@ -3,6 +3,7 @@
   height: 100vh;
   padding: 30px;
   display: flex;
+  color: beige;
 }
 .singelMovie img {
   width: 500px;
